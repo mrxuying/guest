@@ -8,7 +8,7 @@
     <form action="/login_action/" method="post">
       <input type="text" name="username" value="" placeholder="username"><br>
       <input type="text" name="password" value="" placeholder="password"><br>
-      {{ error }}
+      {{ error }}<br>
       <button type="submit" name="button" id='btn'>登&nbsp;录</button>
       {% csrf_token %}
     </form>
