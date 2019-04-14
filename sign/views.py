@@ -14,7 +14,7 @@ def login_action(request):
         if username == 'admin' and password == 'admin123':
             response = HttpResponseRedirect('/event_manage/')
             #response.set_cookie('user',username,3600)   #添加浏览器cookie,3600是有效时间，单位s"user"是cookie的名称；
-            request.session['user'] = username
+            request.session['user'] = username  #将session信息添加到浏览器
             return response
         else:
             return render(request,'index.html',{'error':'username or password error!'})
