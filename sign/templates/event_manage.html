@@ -8,6 +8,7 @@
     <h1>Login Success</h1>
     <div style='float:right;'>
       <a href="#">欢迎您，{{ user }}</a><hr>
+      {% csrf_token %}
     </div>
   </body>
 </html>
