@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>发布会签到管理系统</title>
-  </head>
-  <body>
-    <form action="/login_action/" method="post">
+{% extends "base.html" %}
+{% block content %}
+<div style="width:100%;text-align:center">
+    <form action="/login_action/" method="post" align:center>
       <input type="text" name="username" value="" placeholder="username"><br>
       <input type="text" name="password" value="" placeholder="password"><br>
       {{ error }}<br>
       <button type="submit" name="button" id='btn'>登&nbsp;录</button>
       {% csrf_token %}
     </form>
-  </body>
-</html>
+</div>
+{% endblock %}
