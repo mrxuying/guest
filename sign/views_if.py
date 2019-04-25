@@ -10,7 +10,7 @@ def add_event(request):
     eid = request.POST.get('eid','')
     name = request.POST.get('name','')
     limit = request.POST.get('limit','')
-    status request.POST.get('status','')
+    status = request.POST.get('status','')
     address = request.POST.get('address','')
     start_time = request.POST.get('start_time','')
     if eid == '' or name == '' or limit == '' or address == '' or start_time =='':
@@ -42,37 +42,39 @@ def get_event_list(request):
     if eid == '' and name == '':
         return JsonResponse({'status':10021,'message':'parameter error'})
 
-    if eid !== '':
+    if eid != '':
         event = {}
         try:
             result = Event.objects.get(id=eid)
         except ObjectDoesNotExist:
             return JsonResponse({'status':10022,'message':'query result is empty'})
         else:
+            event['eid'] = result.id
             event['name'] = result.name
             event['limit'] = result.limit
             event['status'] = result.status
             event['address'] = result.address
             event['start_time'] = result.start_time
-            return JsonResponse({'result':200,'message':'success','data':evnet})
+            return JsonResponse({'result':200,'message':'success','data':event})
 
-        if name !='':
-            datas = []
-            results = Event.objects.filter(name_contains=name)
-            if results:
-                for r in results:
-                    event = {}
-                    event['name'] = r.name
-                    event['limit'] = r.limit
-                    event['status'] = r.status
-                    event['address'] = r.address
-                    event['start_time'] = r.start_time
-                    datas.append(event)
-                return JsonResponse({'status':200,'message':'success','data':datas})
-            else:
-                return JsonResponse({'status':10022,'message':'query result is empty'})
+    if name != '':
+        datas = []
+        results = Event.objects.filter(name__contains=name) ##两个下划线
+        if results:
+            for r in results:
+                event = {}
+                event['eid'] = r.id
+                event['name'] = r.name
+                event['limit'] = r.limit
+                event['status'] = r.status
+                event['address'] = r.address
+                event['start_time'] = r.start_time
+                datas.append(event)
+            return JsonResponse({'status':200,'message':'success','data':datas})
+        else:
+            return JsonResponse({'status':10022,'message':'query result is empty'})
 
-##嘉宾查询接口
+##添加嘉宾接口
 def add_guest(request):
     eid = request.POST.get('eid','')
     realname = request.POST.get('realname','')

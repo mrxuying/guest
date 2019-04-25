@@ -85,7 +85,7 @@ DATABASES = {
         'NAME':'guest',
         'USER':'root',
         'PASSWORD':'1106Never',
-        'OPTIONS':{'init_command':"SET sql_mode = 'STRICT_TRANS_TABLES'",},
+        'OPTIONS':{'init_command':"SET sql_mode = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'",},
     }
 }
 
